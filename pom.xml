@@ -1,0 +1,113 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.xdelta3</groupId>
+    <artifactId>docker-xdelta3</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+    <name>docker-xdelta3</name>
+    <description>xdelta3 for Docker</description>
+    <inceptionYear>2019</inceptionYear>
+    
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    
+    <developers>
+        <developer>
+            <name>biao.tang</name>
+            <email>biaotangwork@gmail.com</email>
+            <organization>macrowing</organization>
+            <organizationUrl>http://www.macrowing.com/</organizationUrl>
+        </developer>
+    </developers>
+    
+    <scm>
+        <connection>scm:git:git@github.com:biaotang/docker-xdelda3.git</connection>
+        <developerConnection>scm:git:git@github.com:biaotang/docker-xdelda3.git</developerConnection>
+        <url>https://github.com/biaotang/docker-xdelda3</url>
+    </scm>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <dependency.junit.version>4.12</dependency.junit.version>
+    </properties>
+    
+    <build>
+        <plugins>
+	        <plugin>
+	            <artifactId>maven-assembly-plugin</artifactId>
+	            <configuration>
+	                <appendAssemblyId>false</appendAssemblyId>
+	                <descriptorRefs>
+	                    <descriptorRef>jar-with-dependencies</descriptorRef>
+	                </descriptorRefs>
+	                <archive>
+	                    <manifest>
+	                        <!-- 此处指定main方法入口的class -->
+	                        <mainClass>com.xdelta3.docker.Xdelta</mainClass>
+	                    </manifest>
+	                </archive>
+	            </configuration>
+	            <executions>
+	                <execution>
+	                    <id>make-assembly</id>
+	                    <phase>package</phase>
+	                    <goals>
+	                        <goal>single</goal>
+	                    </goals>
+	                </execution>
+	            </executions>
+	        </plugin>
+	        
+            <!--配置生成源码包 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <defaultGoal>compile</defaultGoal>
+    </build>
+    
+</project>
